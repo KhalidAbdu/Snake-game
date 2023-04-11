@@ -1,0 +1,16 @@
+body{
+    background-color: grey;
+    margin: auto;
+    padding: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#Snake {
+    background-color: darkslategray;
+    border: 2px soild
+}
+h1 {
+    color: purple;
+}
