@@ -11,6 +11,7 @@ let snakeXposition = 350
 let snakeYposition = 350
 let snakeWidth = 25
 let sankeHeight = 25
+let snakeBody = []
 let snakeSpeed = 3 
    // MOVING VARIABLES :
 let isMovingRight = false 
@@ -34,9 +35,25 @@ let myScore = 0
 // FUNCTIONS AND LOGIC : 
    // SNAKE FUNCTION :
 const drawSnake = () => {
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgb(205, 170, 110)'
     ctx.fillRect(snakeXposition, snakeYposition, snakeWidth, sankeHeight)
+    for (let i = snakeBody.length - 1; i >= 1; i--){
+        snakeBody[i] = snakeBody[i-1]
+    }
+    
+    if (snakeBody.length > 0){
+        snakeBody[0] = [snakeXposition, snakeYposition]
+    }
+    
+    for (let i = 1; i < snakeBody.length; i++){
+        ctx.fillRect(snakeBody[i][0], snakeBody[i][1], snakeWidth, sankeHeight)
+        if (snakeXposition === snakeBody[i][0] && snakeYposition === snakeBody[i][1]){
+            gameEnd = true
+        }
+    }
+    
 }
 
    // MOVING SNAKE FUNCTION :
@@ -80,12 +97,13 @@ const drawFood = () => {
         sankeHeight + snakeYposition > foodYposition
       ) {
         console.log('food eaten')
+        for (let i = 0; i < 10; i++) { 
+            snakeBody.push([snakeXposition, snakeYposition])
+          }
         foodXposition = Math.floor(Math.random() * (canvas.width - foodWidth))
         foodYposition = Math.floor(Math.random() * (canvas.height - foodHeight))
         drawFood()
         myScore ++ 
-        
-
       }
       if (
         snakeXposition < 0 ||
@@ -118,22 +136,22 @@ const drawFood = () => {
 // EVENTLISTENERS :
 document.addEventListener('keydown', event => {
     console.log(event)
-    if (event.key === 'ArrowRight') {
+    if (event.key === 'ArrowRight'  && !isMovingLeft) {
         isMovingRight = true
         isMovingUp = false;
         isMovingDown = false;
         isMovingLeft = false
-    } if (event.key === 'ArrowLeft') {
+    } if (event.key === 'ArrowLeft' && !isMovingRight) {
         isMovingLeft = true
         isMovingUp = false;
         isMovingDown = false;
         isMovingRight = false;
-    } if (event.key === 'ArrowUp') {
+    } if (event.key === 'ArrowUp' && !isMovingDown) {
         isMovingUp = true
         isMovingLeft = false;
         isMovingRight = false;
         isMovingDown = false;
-    } if (event.key === 'ArrowDown') {
+    } if (event.key === 'ArrowDown' && !isMovingUp) {
         isMovingDown = true
         isMovingLeft = false;
         isMovingRight = false; 
