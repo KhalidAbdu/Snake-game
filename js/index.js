@@ -12,7 +12,7 @@ let snakeYposition = 350
 let snakeWidth = 25
 let sankeHeight = 25
 let snakeBody = []
-let snakeSpeed = 3 
+let snakeSpeed = 3
    // MOVING VARIABLES :
 let isMovingRight = false 
 let isMovingLeft = false
@@ -27,6 +27,8 @@ let foodHeight = 25
 let gameEnd = false
    // SCORE :
 let myScore = 0 
+// restart button :
+const restartBtn = document.getElementById('restart')
 
 
 
@@ -96,7 +98,11 @@ const drawFood = () => {
         snakeYposition < foodYposition + foodHeight &&
         sankeHeight + snakeYposition > foodYposition
       ) {
-        console.log('food eaten')
+        console.log('food eaten', myScore, snakeSpeed)
+        if (myScore % 2 === 0 && snakeSpeed <= 10 ){
+            snakeSpeed += 1;
+            console.log(snakeSpeed)
+          }
         for (let i = 0; i < 10; i++) { 
             snakeBody.push([snakeXposition, snakeYposition])
           }
@@ -122,6 +128,7 @@ const drawFood = () => {
             ctx.fillStyle = "yellow";
             ctx.font = "50px Verdana"
             ctx.fillText(`Total Score : ${myScore}`, 170, 420);
+            restartBtn.style.display = 'block';
           }
 
     // SCORE FUNCTION : 
@@ -131,6 +138,27 @@ const drawFood = () => {
         ctx.fillText(`Score:${myScore}`,605, 20) 
     }
 
+    // RESTART GAME FUNCTION :
+    const restartGame = () => {
+            snakeXposition = 350
+            snakeYposition = 350
+            snakeWidth = 25
+            sankeHeight = 25
+            snakeBody = []
+            snakeSpeed = 3 
+            isMovingRight = false 
+            isMovingLeft = false
+            isMovingUp = false
+            isMovingDown = false 
+            foodXposition = 250
+            foodYposition = 250
+            foodWidth = 25
+            foodHeight = 25
+            gameEnd = false
+            myScore = 0 
+            restartBtn.style.display = 'none';
+            animateId = requestAnimationFrame(moveSnake);
+    }
 
 
 // EVENTLISTENERS :
@@ -157,6 +185,10 @@ document.addEventListener('keydown', event => {
         isMovingRight = false; 
         isMovingUp = false;
     }
+})
+
+restartBtn.addEventListener('click', () => {
+    restartGame ()
 })
 
 
