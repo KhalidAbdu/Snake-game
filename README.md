@@ -1,3 +1,9 @@
+# My Snake Game 
+
+![alt text](https://wallpapers.com/images/high/clear-snake-game-character-z6jd7jtsl04g6mxx.webp)
+
+
+
 Description :
 
 I was able to create a simple snake game where the snake can grow every time it eats, also i added a score and a gameover screen.
