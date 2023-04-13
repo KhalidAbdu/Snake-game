@@ -2,17 +2,13 @@
 // CANVAS SETUP :
 const canvas = document.getElementById('Snake')
 const ctx = canvas.getContext('2d')
-
-
-
-// DECLARE VARIABLS : 
    // SNAKE VARIABLES :
 let snakeXposition = 350
 let snakeYposition = 350
 let snakeWidth = 25
 let sankeHeight = 25
 let snakeBody = []
-let snakeSpeed = 3
+let snakeSpeed = 2
    // MOVING VARIABLES :
 let isMovingRight = false 
 let isMovingLeft = false
@@ -27,38 +23,34 @@ let foodHeight = 25
 let gameEnd = false
    // SCORE :
 let myScore = 0 
-// restart button :
+   // RESTART BUTTON :
 const restartBtn = document.getElementById('restart')
 
 
 
 
 
-// FUNCTIONS AND LOGIC : 
-   // SNAKE FUNCTION :
+// FUNCTIONS : 
+   // DRAWING SNAKE :
 const drawSnake = () => {
-    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgb(205, 170, 110)'
     ctx.fillRect(snakeXposition, snakeYposition, snakeWidth, sankeHeight)
     for (let i = snakeBody.length - 1; i >= 1; i--){
         snakeBody[i] = snakeBody[i-1]
-    }
-    
+    } 
     if (snakeBody.length > 0){
         snakeBody[0] = [snakeXposition, snakeYposition]
     }
-    
     for (let i = 1; i < snakeBody.length; i++){
         ctx.fillRect(snakeBody[i][0], snakeBody[i][1], snakeWidth, sankeHeight)
         if (snakeXposition === snakeBody[i][0] && snakeYposition === snakeBody[i][1]){
             gameEnd = true
         }
-    }
-    
-}
+      }}
 
-   // MOVING SNAKE FUNCTION :
+
+   // MOVING SNAKE :
    const moveSnake = () => {
     drawSnake()
     drawFood()
@@ -84,12 +76,14 @@ const drawSnake = () => {
       animateId = requestAnimationFrame(moveSnake)
 }}
 
-   // FOOD FUNCTION :
+
+   // DRAWING FOOD :
 const drawFood = () => {
     ctx.fillStyle = 'rgb(114, 160, 193)'
     ctx.fillRect(foodXposition, foodYposition, foodWidth, foodHeight)
 }
  
+
    // COLLISION :
    const collision = () => {
      if (
@@ -97,11 +91,10 @@ const drawFood = () => {
         snakeXposition + snakeWidth > foodXposition &&
         snakeYposition < foodYposition + foodHeight &&
         sankeHeight + snakeYposition > foodYposition
-      ) {
-        console.log('food eaten', myScore, snakeSpeed)
-        if (myScore % 2 === 0 && snakeSpeed <= 10 ){
+      ){
+      console.log(snakeSpeed)
+        if (myScore % 2 === 0 && snakeSpeed < 4 ){
             snakeSpeed += 1;
-            console.log(snakeSpeed)
           }
         for (let i = 0; i < 10; i++) { 
             snakeBody.push([snakeXposition, snakeYposition])
@@ -120,7 +113,7 @@ const drawFood = () => {
         gameEnd = true
     }}
 
-    // GAMEOVER FUNCTION :
+    // GAMEOVER :
     const drawGameOver = () => {
             ctx.font = "50px Arial"
             ctx.fillStyle = 'red'
@@ -129,16 +122,20 @@ const drawFood = () => {
             ctx.font = "50px Verdana"
             ctx.fillText(`Total Score : ${myScore}`, 170, 420);
             restartBtn.style.display = 'block';
+            restartBtn.style.font = '50px Verdana'
+            restartBtn.style.color = 'rgb(245, 245, 245)'
           }
 
-    // SCORE FUNCTION : 
+
+    // SCORE : 
     const score = () => {
         ctx.fillStyle = "white"
         ctx.font = "20px Verdana"
         ctx.fillText(`Score:${myScore}`,605, 20) 
     }
 
-    // RESTART GAME FUNCTION :
+
+    // RESTART GAME :
     const restartGame = () => {
             snakeXposition = 350
             snakeYposition = 350
@@ -190,7 +187,6 @@ document.addEventListener('keydown', event => {
 restartBtn.addEventListener('click', () => {
     restartGame ()
 })
-
 
 
 // START THE GAME :
