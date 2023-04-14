@@ -20,4 +20,6 @@ I hope i can be able to add some audio for everytime the snake eats the food.
 
 the most difficult challenge to be able to match the snake and food coordinates.
 
-## Demo: https://khalidabdu.github.io/Snake-game/
+## Demo:
+
+ https://khalidabdu.github.io/Snake-game/git
