@@ -17,8 +17,13 @@ let isMovingDown = false
    // FOOD VARIABLES : 
 let foodXposition = 250
 let foodYposition = 250
-let foodWidth = 25
-let foodHeight = 25
+let foodWidth = 30
+let foodHeight = 30
+let foodImage = new Image();
+foodImage.src = "./images/apple.png";
+foodImage.onload = () => {
+  drawFood();
+};
    // GAME END : 
 let gameEnd = false
    // SCORE :
@@ -79,8 +84,7 @@ const drawSnake = () => {
 
    // DRAWING FOOD :
 const drawFood = () => {
-    ctx.fillStyle = 'rgb(114, 160, 193)'
-    ctx.fillRect(foodXposition, foodYposition, foodWidth, foodHeight)
+  ctx.drawImage(foodImage, foodXposition, foodYposition, foodWidth, foodHeight);
 }
  
 
@@ -93,7 +97,7 @@ const drawFood = () => {
         sankeHeight + snakeYposition > foodYposition
       ){
       console.log(snakeSpeed)
-        if (myScore % 2 === 0 && snakeSpeed < 4 ){
+        if (myScore % 2 === 0 && snakeSpeed < 6 ){
             snakeSpeed += 1;
           }
         for (let i = 0; i < 10; i++) { 
