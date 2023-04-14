@@ -22,4 +22,4 @@ the most difficult challenge to be able to match the snake and food coordinates.
 
 ## Demo:
 
- https://khalidabdu.github.io/Snake-game/git
+https://khalidabdu.github.io/Snake-game/
